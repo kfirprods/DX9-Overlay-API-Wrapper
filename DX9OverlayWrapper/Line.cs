@@ -2,7 +2,7 @@
 
 namespace DX9OverlayAPIWrapper
 {
-    public class Line : Overlay
+    public class Line : OverlayEntity
     {
         public override bool IsVisible
         {

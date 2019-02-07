@@ -2,7 +2,7 @@
 
 namespace DX9OverlayAPIWrapper
 {
-    public class TextLabel : Overlay
+    public class TextLabel : OverlayEntity
     {
         public override bool IsVisible
         {

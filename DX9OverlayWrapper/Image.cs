@@ -2,7 +2,7 @@
 
 namespace DX9OverlayAPIWrapper
 {
-    public class Image : Overlay
+    public class Image : OverlayEntity
     {
         public override bool IsVisible
         {

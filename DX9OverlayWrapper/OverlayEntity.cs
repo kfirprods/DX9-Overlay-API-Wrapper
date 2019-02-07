@@ -3,7 +3,7 @@
     /// <summary>
     /// The base class of all entities drawn to the overlay (e.g. texts, images...)
     /// </summary>
-    public abstract class Overlay
+    public abstract class OverlayEntity
     {
         /// <summary>
         /// The identity registered with the actual overlay
