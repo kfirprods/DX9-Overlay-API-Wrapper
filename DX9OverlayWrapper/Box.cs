@@ -1,37 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace DX9OverlayAPIWrapper
 {
     public class Box : Overlay
     {
-        public override bool Visible
+        public override bool IsVisible
         {
-            get
-            {
-                return base.Visible;
-            }
+            get => base.IsVisible;
             set
             {
-                DX9Overlay.BoxSetShown(Id, value);
-                base.Visible = value;
+                Dx9Overlay.BoxSetShown(Id, value);
+                base.IsVisible = value;
             }
         }
 
         private Color _color;
         public Color Color
         {
-            get
-            {
-                return _color;
-            }
+            get => _color;
             set
             {
-                DX9Overlay.BoxSetColor(Id, (uint)value.ToArgb());
+                Dx9Overlay.BoxSetColor(Id, (uint)value.ToArgb());
                 _color = value;
             }
         }
@@ -39,15 +28,12 @@ namespace DX9OverlayAPIWrapper
         private Rectangle _rectangle;
         public Rectangle Rectangle
         {
-            get
-            {
-                return _rectangle;
-            }
+            get => _rectangle;
             set
             {
-                DX9Overlay.BoxSetPos(Id, value.X, value.Y);
-                DX9Overlay.BoxSetWidth(Id, value.Width);
-                DX9Overlay.BoxSetHeight(Id, value.Height);
+                Dx9Overlay.BoxSetPos(Id, value.X, value.Y);
+                Dx9Overlay.BoxSetWidth(Id, value.Width);
+                Dx9Overlay.BoxSetHeight(Id, value.Height);
                 _rectangle = value;
             }
         }
@@ -55,13 +41,10 @@ namespace DX9OverlayAPIWrapper
         private bool _borderShown;
         public bool BorderShown
         {
-            get
-            {
-                return _borderShown;
-            }
+            get => _borderShown;
             set
             {
-                DX9Overlay.BoxSetBorder(Id, _borderHeight, value);
+                Dx9Overlay.BoxSetBorder(Id, _borderHeight, value);
                 _borderShown = value;
             }
         }
@@ -69,13 +52,10 @@ namespace DX9OverlayAPIWrapper
         private int _borderHeight;
         public int BorderHeight
         {
-            get
-            {
-                return _borderHeight;
-            }
+            get => _borderHeight;
             set
             {
-                DX9Overlay.BoxSetBorder(Id, value, _borderShown);
+                Dx9Overlay.BoxSetBorder(Id, value, _borderShown);
                 _borderHeight = value;
             }
         }
@@ -83,40 +63,36 @@ namespace DX9OverlayAPIWrapper
         private Color _borderColor;
         public Color BorderColor
         {
-            get
-            {
-                return _borderColor;
-            }
+            get => _borderColor;
             set
             {
-                DX9Overlay.BoxSetBorderColor(Id, (uint)value.ToArgb());
+                Dx9Overlay.BoxSetBorderColor(Id, (uint)value.ToArgb());
                 _borderColor = value;
             }
         }
 
         public Box(Rectangle rectangle, Color color, bool show, bool borderShown = false, int borderHeight = 0, Color borderColor = default(Color))
         {
-            Id = DX9Overlay.BoxCreate(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height, (uint)color.ToArgb(), show);
+            Id = Dx9Overlay.BoxCreate(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height, (uint)color.ToArgb(), show);
             if (borderHeight != 0)
             {
-                DX9Overlay.BoxSetBorder(Id, borderHeight, borderShown);
+                Dx9Overlay.BoxSetBorder(Id, borderHeight, borderShown);
                 _borderHeight = borderHeight;
                 _borderShown = borderShown;
             }
             if (borderColor != default(Color))
             {
-                DX9Overlay.BoxSetBorderColor(Id, (uint)borderColor.ToArgb());
+                Dx9Overlay.BoxSetBorderColor(Id, (uint)borderColor.ToArgb());
                 _borderColor = borderColor;
             }
             _rectangle = rectangle;
-            base.Visible = show;
+            base.IsVisible = show;
             _color = color;
         }
 
         public override void Destroy()
         {
-            DX9Overlay.BoxDestroy(Id);
-            base.Destroy();
+            Dx9Overlay.BoxDestroy(Id);
         }
     }
 }

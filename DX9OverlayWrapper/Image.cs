@@ -1,37 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace DX9OverlayAPIWrapper
 {
     public class Image : Overlay
     {
-        public override bool Visible
+        public override bool IsVisible
         {
-            get
-            {
-                return base.Visible;
-            }
+            get => base.IsVisible;
             set
             {
-                DX9Overlay.ImageSetShown(Id, value);
-                base.Visible = value;
+                Dx9Overlay.ImageSetShown(Id, value);
+                base.IsVisible = value;
             }
         }
 
         private int _rotation;
         public int Rotation
         {
-            get
-            {
-                return _rotation;
-            }
+            get => _rotation;
             set
             {
-                DX9Overlay.ImageSetRotation(Id, value);
+                Dx9Overlay.ImageSetRotation(Id, value);
                 _rotation = value;
             }
         }
@@ -39,13 +28,10 @@ namespace DX9OverlayAPIWrapper
         private Point _position;
         public Point Position
         {
-            get
-            {
-                return _position;
-            }
+            get => _position;
             set
             {
-                DX9Overlay.ImageSetPos(Id, value.X, value.Y);
+                Dx9Overlay.ImageSetPos(Id, value.X, value.Y);
                 _position = value;
             }
         }
@@ -53,30 +39,26 @@ namespace DX9OverlayAPIWrapper
         private Align _align;
         public Align Align
         {
-            get
-            {
-                return _align;
-            }
+            get => _align;
             set
             {
-                DX9Overlay.ImageSetAlign(Id, (int)value);
+                Dx9Overlay.ImageSetAlign(Id, (int)value);
                 _align = value;
             }
         }
 
         public Image(string path, Point position, int rotation, Align align, bool show)
         {
-            Id = DX9Overlay.ImageCreate(path, position.X, position.Y, rotation, (int)align, show);
+            Id = Dx9Overlay.ImageCreate(path, position.X, position.Y, rotation, (int)align, show);
             _position = position;
             _rotation = rotation;
             _align = align;
-            base.Visible = show;
+            base.IsVisible = show;
         }
 
         public override void Destroy()
         {
-            DX9Overlay.ImageDestroy(Id);
-            base.Destroy();
+            Dx9Overlay.ImageDestroy(Id);
         }
     }
 }

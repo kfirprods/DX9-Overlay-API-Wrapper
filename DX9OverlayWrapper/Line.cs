@@ -1,37 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace DX9OverlayAPIWrapper
 {
     public class Line : Overlay
     {
-        public override bool Visible
+        public override bool IsVisible
         {
-            get
-            {
-                return base.Visible;
-            }
+            get => base.IsVisible;
             set
             {
-                DX9Overlay.LineSetShown(Id, value);
-                base.Visible = value;
+                Dx9Overlay.LineSetShown(Id, value);
+                base.IsVisible = value;
             }
         }
 
         private Color _color;
         public Color Color
         {
-            get
-            {
-                return _color;
-            }
+            get => _color;
             set
             {
-                DX9Overlay.LineSetColor(Id, (uint)value.ToArgb());
+                Dx9Overlay.LineSetColor(Id, (uint)value.ToArgb());
                 _color = value;
             }
         }
@@ -39,13 +28,10 @@ namespace DX9OverlayAPIWrapper
         private int _width;
         public int Width
         {
-            get
-            {
-                return _width;
-            }
+            get => _width;
             set
             {
-                DX9Overlay.LineSetWidth(Id, value);
+                Dx9Overlay.LineSetWidth(Id, value);
                 _width = value;
             }
         }
@@ -53,13 +39,10 @@ namespace DX9OverlayAPIWrapper
         private Point _startPosition;
         public Point StartPosition
         {
-            get
-            {
-                return _startPosition;
-            }
+            get => _startPosition;
             set
             {
-                DX9Overlay.LineSetPos(Id, value.X, value.Y, _endPosition.X, _endPosition.Y);
+                Dx9Overlay.LineSetPos(Id, value.X, value.Y, _endPosition.X, _endPosition.Y);
                 _startPosition = value;
             }
         }
@@ -67,31 +50,27 @@ namespace DX9OverlayAPIWrapper
         private Point _endPosition;
         public Point EndPosition
         {
-            get
-            {
-                return _endPosition;
-            }
+            get => _endPosition;
             set
             {
-                DX9Overlay.LineSetPos(Id, _startPosition.X, _startPosition.Y, value.X, value.Y);
+                Dx9Overlay.LineSetPos(Id, _startPosition.X, _startPosition.Y, value.X, value.Y);
                 _endPosition = value;
             }
         }
 
         public Line(Point startPosition, Point endPosition, int width, Color color, bool show)
         {
-            Id = DX9Overlay.LineCreate(startPosition.X, startPosition.Y, endPosition.X, endPosition.Y, width, (uint)color.ToArgb(), show);
+            Id = Dx9Overlay.LineCreate(startPosition.X, startPosition.Y, endPosition.X, endPosition.Y, width, (uint)color.ToArgb(), show);
             _startPosition = startPosition;
             _endPosition = endPosition;
             _width = width;
             _color = color;
-            base.Visible = show;
+            base.IsVisible = show;
         }
 
         public override void Destroy()
         {
-            DX9Overlay.LineDestroy(Id);
-            base.Destroy();
+            Dx9Overlay.LineDestroy(Id);
         }
     }
 }
