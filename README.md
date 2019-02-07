@@ -1,10 +1,12 @@
 DX9-Overlay-API-Wrapper
 =======================
+A fork of JohnnyCrazy's .NET wrapper (https://github.com/JohnnyCrazy/DX9-Overlay-API-Wrapper/tree/master/DX9OverlayWrapper) with the purpose of creating a NuGET package (and possibly translating some of the German documentation to English)
 
+=======================
 A .NET Wrapper for the [DX9-Overlay-API](https://github.com/agrippa1994/DX9-Overlay-API)
 
 
-#####Usage Example (Add the Wrapper DLL as reference):
+##### Usage Example
 
 ```C#
 using System;
@@ -23,18 +25,17 @@ namespace DX9OverlayWrapperTest
         static void Main(string[] args)
         {
             DX9Overlay.SetParam("process", "GFXTest.exe");
-            DX9Overlay.DestroyAllVisual();
+            DX9Overlay.DestroyAllVisual(); // Remove any pre-existing visuals
             TextLabel text = new TextLabel("Arial", 20, TypeFace.NONE, new Point(5, 5), Color.Red, "Test123", true, true);
             Thread.Sleep(5000);
-            text.Text = "Text2"; //Text updaten
+            text.Text = "Text2"; // Update text
             Thread.Sleep(5000);
-            text.Color = Color.Cyan; //Color updaten
+            text.Color = Color.Cyan; // Update color
             Thread.Sleep(5000);
-            text.Destroy(); //Text entfernen
+            text.Destroy(); // Remove the text
         }
     }
 }
 
 ```
 
-For all types, look at the source Files
