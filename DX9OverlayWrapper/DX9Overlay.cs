@@ -6,13 +6,16 @@ namespace DX9OverlayAPIWrapper
 {
     /// <summary>
     /// The binding of the original DX9 overlay binary to C#
+    /// Depends on the existence of the dx9_overlay.dll in the working directory (or within one of the folders of the %PATH%)
     /// </summary>
     public static class Dx9Overlay
     {
         private const string OverlayBinaryPath = "dx9_overlay.dll";
 
-        [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int TextCreate(string font, int fontSize, bool bBold, bool bItalic, int x, int y, uint color, string text, bool bShadow, bool bShow);
+        [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        public static extern int TextCreateUnicode(string font, int fontSize, bool bBold, bool bItalic, int x, int y, uint color, string text, bool bShadow, bool bShow);
         [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl)]
         public static extern int TextDestroy(int id);
         [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl)]
@@ -23,8 +26,10 @@ namespace DX9OverlayAPIWrapper
         public static extern int TextSetColor(int id, uint color);
         [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl)]
         public static extern int TextSetPos(int id, int x, int y);
-        [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int TextSetString(int id, string str);
+        [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        public static extern int TextSetStringUnicode(int id, string str);
         [DllImport(OverlayBinaryPath, CallingConvention = CallingConvention.Cdecl)]
         public static extern int TextUpdate(int id, string font, int fontSize, bool bBold, bool bItalic);
 

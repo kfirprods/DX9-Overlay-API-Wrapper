@@ -155,3 +155,5 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 .vs/
+DX9OverlayWrapper/DX9OverlayAPIWrapper.1.0.0.nupkg
+*.nupkg

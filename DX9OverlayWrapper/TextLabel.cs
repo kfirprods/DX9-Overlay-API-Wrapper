@@ -7,9 +7,11 @@ namespace DX9OverlayAPIWrapper
         public override bool IsVisible
         {
             get => base.IsVisible;
-            set 
+            set
             {
-                Dx9Overlay.TextSetShown(Id, value);
+                if (this.IsVisible == value) return;
+
+                Dx9Overlay.TextSetShown(this.Id, value);
                 base.IsVisible = value;
             }
         }
@@ -17,55 +19,81 @@ namespace DX9OverlayAPIWrapper
         private string _text;
         public string Text
         {
-            get => _text;
+            get => this._text;
             set
             {
-                Dx9Overlay.TextSetString(Id, value);
-                _text = value;
+                if (this._text == value) return;
+
+                Dx9Overlay.TextSetString(this.Id, value);
+                this._text = value;
             }
         }
+
+        public TypeFace TypeFace { get; set; }
+
+        public int FontSize { get; set; }
+
+        public string Font { get; set; }
 
         private bool _shadow;
         public bool Shadow
         {
-            get => _shadow;
+            get => this._shadow;
             set
             {
-                Dx9Overlay.TextSetShadow(Id, value);
-                _shadow = value;
+                if (this._shadow == value) return;
+
+                Dx9Overlay.TextSetShadow(this.Id, value);
+                this._shadow = value;
             }
         }
 
         private Color _color;
         public Color Color
         {
-            get => _color;
+            get => this._color;
             set
             {
-                Dx9Overlay.TextSetColor(Id, (uint)value.ToArgb());
-                _color = value;
+                if (this._color == value) return;
+
+                Dx9Overlay.TextSetColor(this.Id, (uint)value.ToArgb());
+                this._color = value;
             }
         }
 
         private Point _position;
         public Point Position
         {
-            get => _position;
+            get => this._position;
             set
             {
-                Dx9Overlay.TextSetPos(Id, value.X, value.Y);
-                _position = value;
+                if (this._position == value) return;
+
+                Dx9Overlay.TextSetPos(this.Id, value.X, value.Y);
+                this._position = value;
             }
         }
 
-        public TextLabel(string font, int size, TypeFace type, Point position, Color color, string text, bool shadow, bool show)
+        public TextLabel(string font, int size, int x, int y, Color color, string text, bool shadow = true,
+            bool show = true, TypeFace typeFace = TypeFace.None)
         {
-            Id = Dx9Overlay.TextCreate(font, size, type.HasFlag(TypeFace.Bold), type.HasFlag(TypeFace.Italic), position.X, position.Y, (uint)color.ToArgb(), text, shadow, show);
-            _text = text;
-            _shadow = shadow;
+            this.Id = Dx9Overlay.TextCreate(font, size, typeFace.HasFlag(TypeFace.Bold),
+                typeFace.HasFlag(TypeFace.Italic), x, y, (uint) color.ToArgb(), text, shadow, show);
+            this._text = text;
+            this._shadow = shadow;
             base.IsVisible = show;
-            _color = color;
-            _position = position;
+            this._color = color;
+            this._position = new Point(x, y);
+            this.TypeFace = typeFace;
+            this.FontSize = size;
+            this.Font = font;
+        }
+
+        // This is the legacy constructor from the older DX9OverlayWrapper
+        public TextLabel(string font, int size, TypeFace typeFace, Point position, Color color, string text,
+            bool shadow, bool show) : this(font, size, position.X, position.Y, color, text, shadow, show, typeFace)
+        {
+
         }
 
         public override void Destroy()
