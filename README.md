@@ -26,7 +26,7 @@ namespace DX9OverlayWrapperTest
         {
             DX9Overlay.SetParam("process", "GFXTest.exe");
             DX9Overlay.DestroyAllVisual(); // Remove any pre-existing visuals
-            TextLabel text = new TextLabel("Arial", 20, TypeFace.NONE, new Point(5, 5), Color.Red, "Test123", true, true);
+            TextLabel text = new TextLabel("Arial", 20, TypeFace.None, new Point(5, 5), Color.Red, "Test123", true, true);
             Thread.Sleep(5000);
             text.Text = "Text2"; // Update text
             Thread.Sleep(5000);
