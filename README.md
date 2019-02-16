@@ -2,7 +2,10 @@ DX9-Overlay-API-Wrapper
 =======================
 A fork of JohnnyCrazy's .NET wrapper (https://github.com/JohnnyCrazy/DX9-Overlay-API-Wrapper/tree/master/DX9OverlayWrapper) with the purpose of creating a NuGET package (and possibly translating some of the German documentation to English)
 
+Get it on NuGET: https://www.nuget.org/packages/DX9OverlayAPIWrapper/
+
 =======================
+
 A .NET Wrapper for the [DX9-Overlay-API](https://github.com/agrippa1994/DX9-Overlay-API)
 
 
