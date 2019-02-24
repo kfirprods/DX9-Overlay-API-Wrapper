@@ -11,8 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Fork of the DX9 Overlay API Wrapper by JohnnyCrazy</description>
     <releaseNotes>
-    	Added a simpler TextLabel constructor; 
-    	TextLabel now checks if the value of properties changed before invoking the API
+    	TextLabel's FontSize property now actually responds to the setter and updates the in-game text
     </releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>dx9 directx directx9 dx9overlay overlay games graphics 3d 3dgraphics directxapi dx9api</tags>

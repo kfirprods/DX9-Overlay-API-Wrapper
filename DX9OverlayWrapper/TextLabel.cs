@@ -31,7 +31,26 @@ namespace DX9OverlayAPIWrapper
 
         public TypeFace TypeFace { get; set; }
 
-        public int FontSize { get; set; }
+        private int _fontSize;
+        public int FontSize
+        {
+            get => this._fontSize;
+            set
+            {
+                if (this._fontSize == value) return;
+                if (value < 3 || value > 128) return;
+
+                // If _fontSize is 0, then this is an initialization set rather than an actual update
+                // Calling TextUpdate in that case will likely cause memory errors and hence needs to be avoided
+                if (this._fontSize != 0)
+                {
+                    Dx9Overlay.TextUpdate(this.Id, this.Font, value, this.TypeFace.HasFlag(TypeFace.Bold),
+                        this.TypeFace.HasFlag(TypeFace.Italic));
+                }
+
+                this._fontSize = value;
+            }
+        }
 
         public string Font { get; set; }
 
